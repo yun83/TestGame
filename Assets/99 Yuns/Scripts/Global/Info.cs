@@ -7,6 +7,7 @@ public class Info : Single<Info>
     public Transform UserTrans;
     public Animator UserAnim;
     public UiCanvas GameUi;
+    public TypeRpgPlayer TRP;
 
     public int GameMainState = 0;
 

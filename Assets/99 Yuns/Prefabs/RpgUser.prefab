@@ -293,12 +293,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7875984748144527725}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46d469e8201b55a4494dfcf755d5441c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 2
   AttOffset: {x: 0.14, y: 0.28}
   AttArea: {x: 2, y: 1.2}
   AttObject: {fileID: 79271829}

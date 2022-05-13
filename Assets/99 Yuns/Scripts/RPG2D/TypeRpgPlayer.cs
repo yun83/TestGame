@@ -20,10 +20,6 @@ public class TypeRpgPlayer : MonoBehaviour
     private BoxCollider2D AttBox2D;
     private bool AttCheck = false;
 
-    private int PlayerHP = 50;
-    private HpBar PlayerHpBar;
-    private Transform hpBarTrans;
-
     private void Awake()
     {
         anim = transform.GetComponentInChildren<Animator>();
@@ -40,10 +36,7 @@ public class TypeRpgPlayer : MonoBehaviour
         AttObject.SetActive(false);
         AttCheck = false;
 
-        PlayerHpBar = Info.ins.GameUi.AddHpBar();
-        hpBarTrans = PlayerHpBar.transform;
-        PlayerHP = 0;
-        HP_Plus(100);
+        Info.ins.TRP = this;
     }
 
     // Start is called before the first frame update
@@ -55,7 +48,8 @@ public class TypeRpgPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move2D();
+        Move2D(); 
+        cameraTracking();
     }
 
     void Move2D()
@@ -85,8 +79,11 @@ public class TypeRpgPlayer : MonoBehaviour
         movepos.x += (moveH * offset);
         movepos.y += (moveV * offset);
 
-        if (moveH != 0)
+        if (moveH != 0 || moveV != 0)
+        {
+            AttObject.SetActive(false);
             AnimState = 1;
+        }
         else
             AnimState = 0;
 
@@ -126,7 +123,15 @@ public class TypeRpgPlayer : MonoBehaviour
                 AttObject.SetActive(true);
         }
 
-        hpBarTrans.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 0.8f, 0));
+        
+    }
+    void cameraTracking()
+    {
+        Vector3 camMove = new Vector3(0, 0, -10);
+        Vector2 temvec2 = Vector2.Lerp(mainCam.position, transform.position, Time.deltaTime);
+        camMove.x = temvec2.x;
+        camMove.y = temvec2.y;
+        mainCam.position = camMove;
     }
 
     void PlayerAniSetting(int num)
@@ -139,17 +144,6 @@ public class TypeRpgPlayer : MonoBehaviour
         }
     }
 
-    void HP_Plus(int hp)
-    {
-        PlayerHP += hp;
-
-        Info.ins.GameUi.SetDemoText(0, "HP : " + PlayerHP.ToString());
-
-        if (PlayerHP <= 0)
-        {
-            //»ç¸ÁÃ³¸®
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {

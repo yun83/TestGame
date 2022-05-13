@@ -66,6 +66,7 @@
     <Compile Include="Assets\99 Yuns\Scripts\Global\UiCanvas.cs" />
     <Compile Include="Assets\99 Yuns\Scripts\RPG2D\TypeRpgEnemy.cs" />
     <Compile Include="Assets\99 Yuns\Scripts\Uitle\Com.cs" />
+    <Compile Include="Assets\99 Yuns\Scripts\RPG2D\TypeRpgManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\awesome Unity\Warrior free set\License.txt" />
