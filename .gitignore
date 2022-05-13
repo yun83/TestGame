@@ -18,6 +18,7 @@ mono_crash.*
 
 #���� ����
 Temp/
+Library/
 Logs/
 obj/
 UserSettings/
