@@ -19,6 +19,9 @@ mono_crash.*
 #폴더 무시
 Temp/
 Library/
+Logs/
+obj/
+UserSettings/
 
 # Build results
 [Dd]ebug/
