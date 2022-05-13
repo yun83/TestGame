@@ -390,6 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemy: {fileID: 3077636157013814614, guid: 08f6af11abae11445b7868376133de54, type: 3}
+  EnemyList: []
 --- !u!1 &902198293
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,6 +969,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1424502205}
     m_Modifications:
+    - target: {fileID: 5549936610590811320, guid: 9d4ffac09d86afa4082b6fc5e8c05b81, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7875984748144527725, guid: 9d4ffac09d86afa4082b6fc5e8c05b81, type: 3}
       propertyPath: m_Name
       value: RpgUser
