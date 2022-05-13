@@ -16,6 +16,10 @@
 # Mono auto generated files
 mono_crash.*
 
+#폴더 무시
+Temp/
+Library/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
