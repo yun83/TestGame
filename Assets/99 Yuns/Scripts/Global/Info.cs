@@ -15,7 +15,7 @@ public class Info : Single<Info>
     {
         if(GameUi == null)
         {
-            GameUi = GameObject.FindObjectOfType<UiCanvas>();
+            GameUi = FindObjectOfType<UiCanvas>();
         }
     }
 }

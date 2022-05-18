@@ -101,6 +101,7 @@ public class TypeRpgManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
 
             Temp.name = "Àû";
+            tre.Hp = 100;
             tre.trp = TRP;
             tre.hpBar = GameUi.AddHpBar();
 
