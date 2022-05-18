@@ -11,11 +11,15 @@ public class TypeRpgManager : MonoBehaviour
     int GameState = 0;
     bool InitEnd = false;
 
+    [Header("Player Setting")]
     private int PlayerHP = 0;
     private HpBar PlayerHpBar;
     private Transform hpBarTrans;
 
+    [Header("Enemy Setting")]
+    public int MaxShowEnemy = 1;
     private bool CreateEnemyCheck = false;
+    public BoxCollider2D RespawnArea;
     public List<TypeRpgEnemy> EnemyList = new List<TypeRpgEnemy>();
 
     private void Awake()
@@ -66,10 +70,24 @@ public class TypeRpgManager : MonoBehaviour
         if (!InitEnd)
             return;
 
-        if(EnemyList.Count <= 0)
+        if(EnemyList.Count < MaxShowEnemy)
         {
             StartCoroutine(CreateEnemy());
         }
+        else
+        {
+            for(int i = 0; i < EnemyList.Count; i++)
+            {
+                if(EnemyList[i].Hp < 0)
+                {
+                    Destroy(EnemyList[i].hpBar.gameObject);
+                    Destroy(EnemyList[i].gameObject);
+                    EnemyList.RemoveAt(i);
+                }
+            }
+        }
+
+        //Player 상태바
         hpBarTrans.position = Camera.main.WorldToScreenPoint(Info.ins.UserTrans.position + new Vector3(0, 0.8f, 0));
     }
 
@@ -98,12 +116,26 @@ public class TypeRpgManager : MonoBehaviour
 
             GameObject Temp = Instantiate(Enemy);
             TypeRpgEnemy tre = Temp.GetComponent<TypeRpgEnemy>();
+
+            Vector2 SumPosition = RespawnArea.transform.position;
+            float xSize = RespawnArea.size.x / 2;
+            float ySize = RespawnArea.size.y / 2;
+
+            SumPosition.x += Random.Range(-xSize, xSize);
+            SumPosition.y += Random.Range(-ySize, ySize);
+
+            Temp.transform.position = SumPosition;
             yield return new WaitForEndOfFrame();
 
             Temp.name = "적";
+            tre.NicName = "허수아비";
+            tre.MaxHp = 100;
             tre.Hp = 100;
             tre.trp = TRP;
-            tre.hpBar = GameUi.AddHpBar();
+
+            yield return new WaitForEndOfFrame();
+
+            tre.hpBar = GameUi.AddHpBar(tre.NicName);
 
             yield return new WaitForEndOfFrame();
 

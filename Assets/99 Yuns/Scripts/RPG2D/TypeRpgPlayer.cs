@@ -29,7 +29,7 @@ public class TypeRpgPlayer : MonoBehaviour
         Info.ins.UserTrans = transform;
         Info.ins.UserAnim = anim;
 
-        AttObject.GetComponent<AttTarget>().tPlayer = this;
+        //AttObject.GetComponent<AttTarget>().tPlayer = this;
         AttObject.transform.position = AttOffset;
         AttBox2D = AttObject.GetComponent<BoxCollider2D>();
         AttBox2D.size = AttArea;

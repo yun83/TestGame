@@ -32,10 +32,18 @@ public class UiCanvas : MonoBehaviour
         DemoText[idx].text = msg;
     }
 
-    public HpBar AddHpBar()
+    public HpBar AddHpBar(string NicName = "")
     {
+
         Transform temp = Instantiate(hpBar).transform;
+        HpBar ret = temp.GetComponent<HpBar>();
         temp.parent = insGroup;
-        return temp.GetComponent<HpBar>();
+
+        if (NicName == "" || NicName == null)
+            ret.NicName.gameObject.SetActive(false);
+        else
+            ret.NicName.text = NicName;
+
+        return ret;
     }
 }

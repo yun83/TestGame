@@ -9,6 +9,8 @@ public class TypeRpgEnemy : MonoBehaviour
 
     public bool InitCheck = false;
 
+    public string NicName = "";
+    public int MaxHp;
     public int Hp;
     public int Att;
     public int Def;
@@ -27,15 +29,20 @@ public class TypeRpgEnemy : MonoBehaviour
         {
             hpBar.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 0.8f, 0));
         }
+        else
+        {
+            Hp = MaxHp;
+        }
+    }
+
+    public void HitCall()
+    {
+        HP_Plus(-10);
     }
 
     public void HP_Plus(int hp)
     {
         Hp += hp;
-
-        if (Hp <= 0)
-        {
-            //»ç¸ÁÃ³¸®
-        }
+        hpBar.ShowSliding(MaxHp, Hp);
     }
 }

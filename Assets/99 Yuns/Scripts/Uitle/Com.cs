@@ -83,10 +83,10 @@ public class Com : Single<Com>
     public int percentageOfTotal(int now, int max){
         //전체값에서 일부값은 몇 퍼센트
         //(전체값 X 100) ÷ 일부값
-        return ((max*100)/now);
+        return ((now * 100)/ max);
     }
     public float percentageOfTotal(float now, float max){
-        return ((max*100)/now);
+        return ((now * 100)/ max);
     }
 
     /// <summary>
