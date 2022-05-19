@@ -22,7 +22,8 @@ namespace RPGM.Gameplay
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            targetAlpha = 0.5f;
+            if(other.tag == "Player")
+                targetAlpha = 0.5f;
         }
 
         void OnTriggerExit2D(Collider2D other)

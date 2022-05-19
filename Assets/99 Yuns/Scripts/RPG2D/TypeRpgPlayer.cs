@@ -107,37 +107,35 @@ public class TypeRpgPlayer : MonoBehaviour
         else
             transform.eulerAngles = new Vector3(0, 180, 0);
         
-        transform.position = Vector2.MoveTowards(transform.position, movepos, 1);
+        if(AnimState != 5)
+            transform.position = Vector2.MoveTowards(transform.position, movepos, 1);
+        else
+        {
+            HitCheckLogic();
+        }
 
         PlayerAniSetting(AnimState);
-        HitCheckLogic(AnimState);
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-        {
-            float normalizedTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            int vealueToReduce = (int)normalizedTime;
-            normalizedTime -= vealueToReduce;
-            //Debug.Log(normalizedTime);
-            if (normalizedTime >= 0.9f)
-            {
-                AttObject.SetActive(false);
-            }
-            else if (normalizedTime >= 0.6f)
-            {
-                AttObject.SetActive(true);
-            }
-            else if (normalizedTime >= 0.5f)
-            {
-                AttObject.SetActive(false);
-            }
-            else if (normalizedTime >= 0.4f)
-            {
-                AttObject.SetActive(true);
-            }
-        }
     }
 
-    void HitCheckLogic(int getAni)
+    void HitCheckLogic()
     {
+        float normalizedTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        int vealueToReduce = (int)normalizedTime;
+        normalizedTime -= vealueToReduce;
+        //Debug.Log(normalizedTime);
+        
+        if (normalizedTime >= 0.4f && normalizedTime < 0.5f)
+        {
+            AttObject.SetActive(true);
+        }
+        else if(normalizedTime >= 0.6f && normalizedTime < 0.9f)
+        {
+            AttObject.SetActive(true);
+        }
+        else
+        {
+            AttObject.SetActive(false);
+        }
     }
 
     void cameraTracking()
