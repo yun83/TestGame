@@ -16,10 +16,13 @@ public class TypeRpgEnemy : MonoBehaviour
     public int Def;
     public int Agi;
 
+    private bool HitCheck = false;
+    private float HitTime = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        HitCheck = false;
     }
 
     // Update is called once per frame
@@ -33,16 +36,33 @@ public class TypeRpgEnemy : MonoBehaviour
         {
             Hp = MaxHp;
         }
-    }
 
-    public void HitCall()
-    {
-        HP_Plus(-10);
+        if (HitCheck)
+        {
+            if(HitTime < Time.time)
+            {
+                HitCheck = false;
+            }
+        }
     }
 
     public void HP_Plus(int hp)
     {
         Hp += hp;
         hpBar.ShowSliding(MaxHp, Hp);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("Player"))
+        {
+            //Debug.Log("Enemy ------ Enter2D :: " + collision.name + ", " + collision.tag + " :: Hit Time :: " + Time.time);
+            if (!HitCheck)
+            {
+                HP_Plus(-10);
+                HitCheck = true;
+                HitTime = Time.time + 0.19f;
+            }
+        }
     }
 }

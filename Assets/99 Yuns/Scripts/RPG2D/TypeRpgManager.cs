@@ -8,7 +8,6 @@ public class TypeRpgManager : MonoBehaviour
     private UiCanvas GameUi;
     private TypeRpgPlayer TRP;
 
-    int GameState = 0;
     bool InitEnd = false;
 
     [Header("Player Setting")]

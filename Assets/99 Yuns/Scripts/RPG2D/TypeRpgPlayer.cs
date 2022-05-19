@@ -18,7 +18,7 @@ public class TypeRpgPlayer : MonoBehaviour
     public Vector2 AttArea = new Vector2(2, 1.2f);
     public GameObject AttObject;
     private BoxCollider2D AttBox2D;
-    private bool AttCheck = false;
+    private bool AttKetDown = false;
 
     private void Awake()
     {
@@ -29,13 +29,11 @@ public class TypeRpgPlayer : MonoBehaviour
         Info.ins.UserTrans = transform;
         Info.ins.UserAnim = anim;
 
-        //AttObject.GetComponent<AttTarget>().tPlayer = this;
         AttObject.transform.position = AttOffset;
         AttBox2D = AttObject.GetComponent<BoxCollider2D>();
         AttBox2D.size = AttArea;
         AttObject.SetActive(false);
-        AttCheck = false;
-
+        AttKetDown = false;
         Info.ins.TRP = this;
     }
 
@@ -62,6 +60,14 @@ public class TypeRpgPlayer : MonoBehaviour
         moveH = Input.GetAxis("Horizontal");
         moveV = Input.GetAxis("Vertical");
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            AttKetDown = true;
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            AttKetDown = false;
+        }
 #endif
         if (Info.ins.GameUi == null)
             return;
@@ -87,11 +93,9 @@ public class TypeRpgPlayer : MonoBehaviour
         else
             AnimState = 0;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+
+        if (AttKetDown)
             AnimState = 5;
-            AttCheck = true;
-        }
 
         if (moveH < 0)
             LookCheck = false;
@@ -102,29 +106,40 @@ public class TypeRpgPlayer : MonoBehaviour
             transform.eulerAngles = Vector3.zero;
         else
             transform.eulerAngles = new Vector3(0, 180, 0);
-
+        
         transform.position = Vector2.MoveTowards(transform.position, movepos, 1);
 
         PlayerAniSetting(AnimState);
+        HitCheckLogic(AnimState);
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
             float normalizedTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-
+            int vealueToReduce = (int)normalizedTime;
+            normalizedTime -= vealueToReduce;
+            //Debug.Log(normalizedTime);
             if (normalizedTime >= 0.9f)
             {
                 AttObject.SetActive(false);
-                AttCheck = false;
             }
             else if (normalizedTime >= 0.6f)
+            {
                 AttObject.SetActive(true);
+            }
             else if (normalizedTime >= 0.5f)
+            {
                 AttObject.SetActive(false);
+            }
             else if (normalizedTime >= 0.4f)
+            {
                 AttObject.SetActive(true);
+            }
         }
-
-        
     }
+
+    void HitCheckLogic(int getAni)
+    {
+    }
+
     void cameraTracking()
     {
         Vector3 camMove = new Vector3(0, 0, -10);
