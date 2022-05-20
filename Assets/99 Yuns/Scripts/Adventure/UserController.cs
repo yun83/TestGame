@@ -7,6 +7,8 @@ public class UserController : MonoBehaviour
     public int State = 0;
 
     public int PlayerHP = 0;
+    public float OverYPos = -15;
+    private bool OverCheck = false;
 
     [Header("이동속도")]
     public float moveSpeed = 5;
@@ -27,6 +29,7 @@ public class UserController : MonoBehaviour
     private int oldAnimIdx = -1;
     private BoxCollider2D Box2D;
     private Transform mainCam;
+    private bool AttKetDown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,7 @@ public class UserController : MonoBehaviour
 
         State = 0;
         PlayerHP = 0;
+        OverCheck = false;
         HP_Plus(100);
     }
 
@@ -59,6 +63,15 @@ public class UserController : MonoBehaviour
 #if UNITY_EDITOR
         moveH = Input.GetAxis("Horizontal");
         moveV = Input.GetAxis("Vertical");
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            AttKetDown = true;
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            AttKetDown = false;
+        }
 #endif
         if (Info.ins.GameUi == null)
             return;
@@ -136,6 +149,12 @@ public class UserController : MonoBehaviour
             }
         }
 
+        if(movepos.y < OverYPos && !OverCheck)
+        {
+            OverCheck = true;
+            Invoke("fallingDeath", 0.2f);
+        }
+
         movepos.y -= verticalVelocity;
         transform.position = Vector2.MoveTowards(transform.position, movepos, 1);
         PlayerAniSetting(AnimState);
@@ -185,10 +204,6 @@ public class UserController : MonoBehaviour
             default:
                 JumpCheck = false;
                 verticalVelocity = 0;
-                break;
-            case "placeDie":
-                Box2D.isTrigger = true;
-                Invoke("fallingDeath", 0.2f);
                 break;
         }
         //Debug.Log("Collision :: " + collision.transform.name);

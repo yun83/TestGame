@@ -61,6 +61,7 @@
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Tiles\GridInformation\Scripts\GridInformation.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Tiles\Terrain Tile\Scripts\TerrainTile.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\UI\SpriteUIElement.cs" />
+    <Compile Include="Assets\99 Yuns\Scripts\SigsawPuzzle\SigsawManager.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Tiles\Custom\PipelineTile.cs" />
     <Compile Include="Assets\99 Yuns\Scripts\RPG2D\TypeRpgPlayer.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\GameModel.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\99 Yuns\Scripts\Uitle\VirtualJoystick.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\InventoryItem.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\CharacterController2D.cs" />
+    <Compile Include="Assets\99 Yuns\Scripts\SigsawPuzzle\PuzzlePiece.cs" />
     <Compile Include="Assets\99 Yuns\Scripts\RPG2D\HpBar.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\ConversationPiece.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\TutorialInfo\Scripts\Readme.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\CameraController.cs" />
     <Compile Include="Assets\99 Yuns\Scripts\Global\UiCanvas.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Tiles\Hexagonal Rule Tile\HexagonalRuleTile.cs" />
+    <Compile Include="Assets\99 Yuns\Scripts\RPG2D\HitAlphaChange.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\UI\TranslationAnimation.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Tiles\Rule Tile\Scripts\RuleTile.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\CloudSystem.cs" />
@@ -114,7 +117,6 @@
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\ShowConversation.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\FootstepTimer.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\MusicController.cs" />
-    <Compile Include="Assets\99 Yuns\Scripts\RPG2D\HitAlphaChange.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
@@ -123,6 +125,7 @@
     <None Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\CreatorKitRPG_Third-PartyNotice.txt" />
     <None Include="Assets\awesome Unity\Warrior free set\License.txt" />
+    <None Include="Assets\awesome Unity\Pixel Art Platformer - Village Props\Changelog.txt" />
     <None Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\TextMesh Pro\Resources\Fonts &amp; Materials\mr-pixel\VTF MisterPixel\Velvetyne Black Font Licence.txt" />
     <None Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
