@@ -72,7 +72,6 @@
     <Compile Include="Assets\99 Yuns\Scripts\Uitle\VirtualJoystick.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\InventoryItem.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\CharacterController2D.cs" />
-    <Compile Include="Assets\99 Yuns\Scripts\SigsawPuzzle\PuzzlePiece.cs" />
     <Compile Include="Assets\99 Yuns\Scripts\RPG2D\HpBar.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\ConversationPiece.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\TutorialInfo\Scripts\Readme.cs" />
@@ -92,6 +91,7 @@
     <Compile Include="Assets\99 Yuns\Scripts\RPG2D\HitAlphaChange.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\UI\TranslationAnimation.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Tiles\Rule Tile\Scripts\RuleTile.cs" />
+    <Compile Include="Assets\99 Yuns\Scripts\SigsawPuzzle\uiPuzzlePiece.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\CloudSystem.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Cutscene\Runtime\Cutscene.cs" />
     <Compile Include="Assets\awesome Unity\Creator_Kit_ 2DRPG\Creator Kit - RPG\Scripts\Gameplay\StoryItem.cs" />
