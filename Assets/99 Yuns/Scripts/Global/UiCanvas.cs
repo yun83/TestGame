@@ -14,11 +14,14 @@ public class UiCanvas : MonoBehaviour
     public Text[] DemoText;
 
     public Transform insGroup;
+    public Button AttButton;
+    public bool AttKeyDown = false;
 
     // Start is called before the first frame update
     void Start()
     {
         Info.ins.GameUi = this;
+        AttKeyDown = false;
     }
 
     // Update is called once per frame
@@ -46,4 +49,8 @@ public class UiCanvas : MonoBehaviour
 
         return ret;
     }
+
+    public void OnAttKeyDown() { AttKeyDown = true; }
+    public void OnAttKeyUp() { AttKeyDown = false; }
+
 }

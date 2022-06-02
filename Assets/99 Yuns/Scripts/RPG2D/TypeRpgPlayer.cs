@@ -78,6 +78,14 @@ public class TypeRpgPlayer : MonoBehaviour
             moveV = Info.ins.GameUi.LeftHand.JoyVec.y;
         }
 
+        if (Info.ins.GameUi.AttKeyDown)
+        {
+            AttKetDown = true;
+        }
+        else
+        {
+            AttKetDown = false;
+        }
 
         float offset = Time.deltaTime * moveSpeed;
         Vector2 movepos = transform.position;
