@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     public int GameType = 0;
     public float Speed = 2f;
     public float LifeTime = 5;
+    public int Damege = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +38,12 @@ public class Bullet : MonoBehaviour
         if (collision.tag == "Enemy")
         {
             Debug.Log("Bullet Trigger" + collision.name);
+            collision.GetComponent<miniEnemy>().AddHp(-Damege);
+            DeletThisObject();
+        }
+        if(collision.name == "Wall")
+        {
+            DeletThisObject();
         }
     }
 }

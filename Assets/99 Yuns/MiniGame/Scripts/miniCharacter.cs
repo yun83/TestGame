@@ -13,7 +13,7 @@ public class miniCharacter : MonoBehaviour
     public float ShootSpeed = 10f;
 
     private bool AttKetDown = false;
-    private bool LookCheck = true;
+    //private bool LookCheck = true;
 
     public Transform Shooter;
     private float shootTime = 0;
@@ -70,11 +70,10 @@ public class miniCharacter : MonoBehaviour
         if (AttKetDown)
             AnimState = 5;
 
-        if (moveH < 0)
-            LookCheck = false;
-        else if (moveH > 0)
-            LookCheck = true;
-
+        //if (moveH < 0)
+        //    LookCheck = false;
+        //else if (moveH > 0)
+        //    LookCheck = true;
         //Vector3 _eulerAngles = ThisTrans.eulerAngles;
         //if (LookCheck)
         //    _eulerAngles.y = 0;
