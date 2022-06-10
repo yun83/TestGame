@@ -52,7 +52,7 @@ ExportedObj/
 *.pdb.meta
 *.mdb.meta
 
-# Unity3D generated file on crash reports
+# Unity3D Generated File On Crash Reports
 sysinfo.txt
 
 # Builds
@@ -60,6 +60,21 @@ sysinfo.txt
 *.aab
 *.unitypackage
 *.app
+
+Assets/Cinemachine/PostFX/Editor/CinemachinePostFX.unitypackage.meta
+Assets/Cinemachine/Timeline/LegacyTimelineAPI.unitypackage.meta
+*.swp
+.idea
+JetBrains
+/Assets/Plugins/Editor/JetBrains.meta
+/Assets/Plugins/Editor.meta
+/Assets/Plugins.meta
+
+# Switch releated
+/SwitchIL2CPPCache/
+/SwitchIL2CPPStats/
+*.nsp
+*.nspd
 
 # Crashlytics generated file
 crashlytics-build.properties
