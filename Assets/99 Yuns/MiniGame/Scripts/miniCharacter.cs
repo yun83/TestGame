@@ -6,11 +6,13 @@ public class miniCharacter : MonoBehaviour
 {
     private Transform ThisTrans;
     public GameObject Bullet;
+    public Transform BulletGroup;
 
     public float yAreaMax = 5;
     public float MoveSpeed = 2f;
     public float ShootDelay = 0.5f;
     public float ShootSpeed = 10f;
+    public int bulletDamege = 1;
 
     private bool AttKetDown = false;
     //private bool LookCheck = true;
@@ -22,6 +24,10 @@ public class miniCharacter : MonoBehaviour
     void Start()
     {
         ThisTrans = this.transform;
+        if(BulletGroup == null)
+        {
+            BulletGroup = new GameObject("BulletGroup").transform;
+        }
     }
 
     // Update is called once per frame
@@ -97,7 +103,12 @@ public class miniCharacter : MonoBehaviour
             Bullet bulletScripts = tempBullet.AddComponent<Bullet>();
             bulletScripts.Speed = ShootSpeed;
             bulletScripts.GameType = 1;
+            bulletScripts.Damege = 1;
             tempBullet.transform.position = Shooter.position;
+
+            tempBullet.name = "Bullet_D[" + bulletDamege + "] S[" + ShootSpeed + "]";
+            if (BulletGroup != null)
+                tempBullet.transform.parent = BulletGroup;
         }
         shootTime += Time.deltaTime;
     }

@@ -119,7 +119,7 @@ public class TypeRpgManager : MonoBehaviour
             SumPosition.y += Random.Range(-ySize, ySize);
 
             Temp.transform.position = SumPosition;
-            yield return new WaitForEndOfFrame();
+            yield return null;// new WaitForEndOfFrame();
 
             Temp.name = "적";
             tre.NicName = "허수아비";

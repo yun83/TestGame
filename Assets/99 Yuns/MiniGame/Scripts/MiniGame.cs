@@ -7,6 +7,7 @@ public class MiniGame : Single<MiniGame>
     public int State = 0;
     public GameObject ResPlayer;
     public GameObject ResEnemy;
+    public Transform EnemyGroup;
 
     [Range(1, 10)]
     public float yAreaMax = 5;
@@ -16,10 +17,14 @@ public class MiniGame : Single<MiniGame>
     public int EnemyStartLv = 1;
     public float EnemyCallTime = 3f;
     private float EnemyTime = 0;
+    private float LvCheckTime = 0;
+    private float LvDownTime = 15;
 
     public GameObject PlayerClone;
     private miniCharacter charScript;
     private Vector3 StartPos;
+
+    public float PlayTime = 0;
 
     public int Score = 0;
     private int checkScore = 0;
@@ -74,6 +79,7 @@ public class MiniGame : Single<MiniGame>
                     checkScore = Score;
                     UiCanvas.ins.SetDemoText(2, "Score: " + Score.ToString());
                 }
+                PlayTime += Time.deltaTime;
                 break;
         }
     }
@@ -84,14 +90,41 @@ public class MiniGame : Single<MiniGame>
         {
             GameObject tempEnemyObj = Instantiate(ResEnemy);
             Vector3 EnemyStartPoint = new Vector3(15, 0, 0);
-            EnemyStartPoint.y = Random.RandomRange(-yAreaMax, yAreaMax);
-            Debug.Log(EnemyStartPoint);
+            EnemyStartPoint.y = Random.Range(-yAreaMax, yAreaMax);
 
+            if (EnemyGroup != null)
+            {
+                tempEnemyObj.transform.parent = EnemyGroup;
+            }
+            else
+            {
+                EnemyGroup = new GameObject("EnemyGroup").transform;
+                tempEnemyObj.transform.parent = EnemyGroup;
+            }
 
+            //Debug.Log(EnemyStartPoint);
+            tempEnemyObj.name = "Enemy_Lv[" + EnemyStartLv + "]";
             tempEnemyObj.GetComponent<miniEnemy>().InitEnemy(EnemyStartLv, EnemyStartPoint);
 
             EnemyTime = 0;
         }
+
+        if(LvCheckTime > LvDownTime)
+        {
+            EnemyStartLv++;
+
+            EnemyCallTime -= 0.5f;
+            if (EnemyCallTime < 0.2f)
+                EnemyCallTime = 0.2f;
+
+            LvDownTime -= 2f;
+            if (LvDownTime < 3)
+                LvDownTime = 3;
+
+            LvCheckTime = 0;
+        }
+
         EnemyTime += Time.deltaTime;
+        LvCheckTime += Time.deltaTime;
     }
 }
