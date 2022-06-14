@@ -21,4 +21,8 @@ public class DemoMainEvent : MonoBehaviour
     {
         SceneManager.LoadScene(SceneName[3]);
     }
+    public void OnClick_DemoButton_4()
+    {
+        SceneManager.LoadScene(SceneName[4]);
+    }
 }

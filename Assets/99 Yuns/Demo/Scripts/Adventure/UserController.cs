@@ -220,9 +220,9 @@ public class UserController : MonoBehaviour
     {
         PlayerHP += hp;
 
-        //if (UiCanvas.ins == null)
-        //    Invoke("ResetHpText", 0.2f);
-        //else
+        if (UiCanvas.ins == null)
+            Invoke("ResetHpText", 0.2f);
+        else
             UiCanvas.ins.SetDemoText(0, "HP : " + PlayerHP.ToString());
 
         if (PlayerHP <= 0)

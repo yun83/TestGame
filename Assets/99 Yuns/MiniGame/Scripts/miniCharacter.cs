@@ -8,7 +8,7 @@ public class miniCharacter : MonoBehaviour
     public GameObject Bullet;
     public Transform BulletGroup;
 
-    public float yAreaMax = 5;
+    public Vector2 screenSize;
     public float MoveSpeed = 2f;
     public float ShootDelay = 0.5f;
     public float ShootSpeed = 10f;
@@ -28,6 +28,8 @@ public class miniCharacter : MonoBehaviour
         {
             BulletGroup = new GameObject("BulletGroup").transform;
         }
+        screenSize = MiniGame.ins.screenSize;
+        SpeedShow();
     }
 
     // Update is called once per frame
@@ -70,7 +72,7 @@ public class miniCharacter : MonoBehaviour
         movepos.x += (moveH * offset);
         movepos.y += (moveV * offset);
 
-        movepos.y = Mathf.Clamp(movepos.y, -yAreaMax, yAreaMax);
+        movepos.y = Mathf.Clamp(movepos.y, -screenSize.y, (screenSize.y - 1));
 
 
         if (AttKetDown)
@@ -88,7 +90,10 @@ public class miniCharacter : MonoBehaviour
         //ThisTrans.eulerAngles = _eulerAngles;
 
         if (AnimState != 5)
+        {
             ThisTrans.position = Vector2.MoveTowards(ThisTrans.position, movepos, 1);
+        }
+
     }
 
     void ShooterLogic()
@@ -118,6 +123,22 @@ public class miniCharacter : MonoBehaviour
         if (other.tag == "Bullet")
             return;
 
-        Debug.Log("Player Trigger" + other.name);
+        if(other.name == "DropItem")
+        {
+            miniDropItem mItem = other.gameObject.GetComponent<miniDropItem>();
+            if (mItem.ItemType == 0)
+            {
+                MoveSpeed += 0.5f;
+            }
+            SpeedShow();
+            Destroy(other.gameObject);
+        }
+        Debug.Log("Player Trigger [" + other.name + "]");
+    }
+
+    void SpeedShow()
+    {
+        string textStr = string.Format("Speed : {0:0.00}", MoveSpeed);
+        UiCanvas.ins.SetDemoText(1, textStr);
     }
 }

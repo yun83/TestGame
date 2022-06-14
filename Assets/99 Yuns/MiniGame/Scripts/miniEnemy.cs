@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class miniEnemy : MonoBehaviour
 {
     public SpriteRenderer nowSpr;
-    int eState = 0;
+    public int eState = 0;
     public float MoveSpeed = 3f;
     public int Hp = 0;
     private int StartHp = 0;
@@ -14,12 +14,10 @@ public class miniEnemy : MonoBehaviour
     private bool aniEnd = false;
     int anicnt = 0;
     float colorA = 1;
+    public GameObject DropItem;
 
     public HpBar _hpBar;
-    // Start is called before the first frame update
-    private void Awake()
-    {
-    }
+    private Camera mCam;
 
     public void InitEnemy(int _Lv, Vector3 _pos)
     {
@@ -31,35 +29,20 @@ public class miniEnemy : MonoBehaviour
         switch (_Lv)
         {
             case 0:
-            case 1:
-                StartHp = 2;
-                Hp = 2;
-                MoveSpeed = 3f;
-                break;
-            case 2:
-                StartHp = 3;
-                Hp = 3;
-                MoveSpeed = 3f;
-                break;
-            case 3:
-                StartHp = 4;
-                Hp = 4;
-                MoveSpeed = 3.5f;
-                break;
-            case 4:
-                StartHp = 5;
-                Hp = 5;
-                MoveSpeed = 4f;
-                break;
-            default:
-                StartHp = 7;
-                Hp = 7;
-                MoveSpeed = 4.5f;
-                break;
+            case 1: StartHp = 1; Hp = 1; MoveSpeed = 3f; break;
+            case 2: StartHp = 2; Hp = 2; MoveSpeed = 3f; break;
+            case 3: StartHp = 2; Hp = 2; MoveSpeed = 3.5f; break;
+            case 4: StartHp = 3; Hp = 3; MoveSpeed = 4f; break;
+            case 5: StartHp = 3; Hp = 3; MoveSpeed = 4.5f; break;
+            case 6: StartHp = 4; Hp = 4; MoveSpeed = 4.5f; break;
+            case 7: StartHp = 4; Hp = 4; MoveSpeed = 5f; break;
+            default: StartHp = 5; Hp = 5; MoveSpeed = 5f; break;
         }
 
         if(nowSpr == null)
             nowSpr = GetComponent<SpriteRenderer>();
+
+        mCam = Camera.main;
 
         colorA = 1;
         _hpBar = UiCanvas.ins.AddHpBar("적");
@@ -79,7 +62,21 @@ public class miniEnemy : MonoBehaviour
         movepos.x += (-1 * offset);
         transform.position = Vector2.MoveTowards(transform.position, movepos, 1);
 
-        _hpBar.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 2.5f, 0));
+        if(movepos.x < -12)
+        {
+            eState = 3;
+            StartCoroutine(EnemyDeath());
+        }
+
+        Vector3 CheckV3 = mCam.WorldToScreenPoint(transform.position + new Vector3(0, 2.5f, 0));
+        _hpBar.transform.position = CheckV3;
+
+        //화면 벗어남 체크
+        if(-1 > CheckV3.x)
+        {
+            eState = 4;
+            StartCoroutine(EnemyDeath());
+        }
     }
 
     public void AddHp(int _hp)
@@ -92,8 +89,9 @@ public class miniEnemy : MonoBehaviour
         _hpBar.ShowSliding(StartHp, Hp);
         if(Hp <= 0)
         {
+            Create_Item();
             eState = 2;
-            StartCoroutine(EnemyBoomEvent());
+            StartCoroutine(EnemyDeath());
         }
     }
 
@@ -103,7 +101,7 @@ public class miniEnemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator EnemyBoomEvent()
+    IEnumerator EnemyDeath()
     {
         //적의 죽음 등의 이벤트 호출
         Destroy(gameObject.GetComponent<Collider2D>());
@@ -128,5 +126,15 @@ public class miniEnemy : MonoBehaviour
         yield return null;
         //호출 종료 후의 오브젝트 제거
         DestroyEnemy();
+    }
+
+    void Create_Item()
+    {
+        GameObject tempItem = Instantiate(DropItem);
+        miniDropItem mItem = tempItem.GetComponent<miniDropItem>();
+        mItem.ItemType = 0;
+        mItem.transform.position = transform.position;
+        mItem.StartPoint = transform.position;
+        mItem.StartMove();
     }
 }

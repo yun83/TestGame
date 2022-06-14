@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniGame : Single<MiniGame>
+public class MiniGame : MonoBehaviour
 {
+    public static MiniGame ins;
+
     public int State = 0;
     public GameObject ResPlayer;
     public GameObject ResEnemy;
     public Transform EnemyGroup;
 
-    [Range(1, 10)]
-    public float yAreaMax = 5;
     [Range(1f, 10)]
     public float MoveSpeed = 2f;
 
@@ -28,26 +28,27 @@ public class MiniGame : Single<MiniGame>
 
     public int Score = 0;
     private int checkScore = 0;
+    public Vector2 screenSize;
+    private Camera mainCam;
 
 
     private void Awake()
     {
+        ins = this;
+
         State = 0;
         Score = 0;
+        mainCam = Camera.main;
 
         if (PlayerClone != null)
         {
             StartPos = PlayerClone.transform.position;
             charScript = PlayerClone.GetComponent<miniCharacter>();
+
+            PageSizeCheck();
         }
         else
             StartPos = new Vector3(-7, 0, 0);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     private void Update()
@@ -66,10 +67,11 @@ public class MiniGame : Single<MiniGame>
                     PlayerClone.name = "플레이어";
                     charScript = PlayerClone.GetComponent<miniCharacter>();
                     PlayerClone.transform.position = StartPos;
+                    PageSizeCheck();
                 }
 
                 charScript.MoveSpeed = this.MoveSpeed;
-                charScript.yAreaMax = this.yAreaMax;
+                charScript.screenSize = this.screenSize;
                 State = 1;
                 break;
             case 1:
@@ -89,8 +91,9 @@ public class MiniGame : Single<MiniGame>
         if (EnemyTime > EnemyCallTime)
         {
             GameObject tempEnemyObj = Instantiate(ResEnemy);
-            Vector3 EnemyStartPoint = new Vector3(15, 0, 0);
-            EnemyStartPoint.y = Random.Range(-yAreaMax, yAreaMax);
+            Vector3 EnemyStartPoint = new Vector3(screenSize.x + 1, 0, 0);
+            float yPos = screenSize.y - 0.5f;
+            EnemyStartPoint.y = Random.Range(-yPos, yPos);
 
             if (EnemyGroup != null)
             {
@@ -117,7 +120,7 @@ public class MiniGame : Single<MiniGame>
             if (EnemyCallTime < 0.2f)
                 EnemyCallTime = 0.2f;
 
-            LvDownTime -= 2f;
+            LvDownTime -= 0.5f;
             if (LvDownTime < 3)
                 LvDownTime = 3;
 
@@ -126,5 +129,18 @@ public class MiniGame : Single<MiniGame>
 
         EnemyTime += Time.deltaTime;
         LvCheckTime += Time.deltaTime;
+    }
+
+    //화면의 3D 좌표계 넓이 높이 구하는 공식
+    void PageSizeCheck()
+    {
+        Vector3 tempSize;
+        tempSize.x = Screen.width;
+        tempSize.y = Screen.height;
+        //카메라에 그려질 오브젝트의 위치를 계산하여 z거리를 준다
+        tempSize.z = Mathf.Abs(mainCam.transform.position.z - transform.position.z);
+
+        //WorldToScreenPoint 반대
+        screenSize = Camera.main.ScreenToWorldPoint(tempSize);
     }
 }

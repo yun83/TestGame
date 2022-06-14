@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UiCanvas : Single<UiCanvas>
+public class UiCanvas : MonoBehaviour
 {
+    public static UiCanvas ins;
     public VirtualJoystick LeftHand;
 
     public GameObject hpBar;
@@ -14,19 +15,14 @@ public class UiCanvas : Single<UiCanvas>
     public Text[] DemoText;
 
     public Transform insGroup;
-    public Button AttButton;
+    //public Button AttButton;
     public bool AttKeyDown = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        ins = this;
         AttKeyDown = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SetDemoText(int idx, string msg)
