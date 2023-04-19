@@ -7,23 +7,23 @@ public class PuzzelGame2 : MonoBehaviour
 {
     public int puzzelState = 0;
 
-    [Header("ÆÛÁñ Å¸ÀÔ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½")]
     [Tooltip("3x3 = 3, 4x4 = 4, 5x5 = 5")]
     [Range(3, 8)]
     public int PlayType = 3;
     public Transform PieceGroup;
 
-    [Header("°á°úÀ§Ä¡")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡")]
     public RectTransform GameBackGround;
-    [Header("°á°ú¿©¹é »çÀÌÁî")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public float WinBackOverSize = 5;
 
-    [Header("½Â¸®°á°úÃ¢")]
+    [Header("ï¿½Â¸ï¿½ï¿½ï¿½ï¿½Ã¢")]
     public GameObject WinPopup;
     public Button ReStart;
     public Text PlayTimeText;
 
-    [Header("ÆÛÁñ ÀÌ¹ÌÁö")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½")]
     public Sprite[] ImageSpr;
     public Vector2 PieceSize = new Vector2(100, 100);
 
@@ -92,25 +92,25 @@ public class PuzzelGame2 : MonoBehaviour
         WinPopup.SetActive(false);
         puzzelState = 0;
 
-        //·Îµù Ã¢À» ³ÖÀ¸·Á¸é ÇÁ·¹ÀÓ º°·Î ²÷¾î °¡´Â ¹æ¹ıµµ ÀÖ´Ù
+        //ï¿½Îµï¿½ Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½
         //yield return new WaitForEndOfFrame();
 
         yield return null;
 
-        //----- °ÔÀÓ ÆÇ³¾ À§Ä¡¿Í Å©±â Àû¿ë -----
+        //----- ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -----
         Vector2 sumSize;
         sumSize.x = (PieceSize.x * PlayType) + (WinBackOverSize * 2);
         sumSize.y = (PieceSize.y * PlayType) + (WinBackOverSize * 2);
 
         GameBackGround.sizeDelta = sumSize;
 
-        //----- ½ÃÀÛ À§Ä¡ ÃøÁ¤ -----
+        //----- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ -----
         StartPos.x = GameBackGround.anchoredPosition.x - (PieceSize.x * (PlayType / 2));
         StartPos.y = GameBackGround.anchoredPosition.y + (PieceSize.y * (PlayType / 2));
         if (PlayType % 2 == 0)
         {
-            //Â¦¼öÀÏ°æ¿ì ÁÂÇ¥ ¼öÁ¤
-            Debug.Log("¾Æ¾Æ¾Æ¾ÆÚ");
+            //Â¦ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½
+            Debug.Log("ï¿½Æ¾Æ¾Æ¾Æï¿½");
             StartPos.x += (PieceSize.x / 2);
             StartPos.y -= (PieceSize.y / 2);
         }
@@ -138,7 +138,7 @@ public class PuzzelGame2 : MonoBehaviour
         tempNum[tempIdx] = tempNum[PuzzelGameSize - 1];
         tempNum[PuzzelGameSize - 1] = PuzzelGameSize - 1;
 
-        //¹è¿­ ¼³Á¤
+        //ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½
         PieceData = new int[PlayType][];
         for(int i = 0; i < PlayType; i++)
         {
@@ -155,11 +155,11 @@ public class PuzzelGame2 : MonoBehaviour
                 puzzel2Piece p2pTemp = new puzzel2Piece();
 
                 float xPos = StartPos.x + (PieceSize.x * k);
-                //2Â÷ ¹è¿­À» 1Â÷ ¹è¿­·Î ÀüÈ¯
+                //2ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ 1ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½È¯
                 cnt = (i * PlayType) + k;
                 anPos[cnt] = new Vector2(xPos, yPos);
 
-                //¿ÀºêÁ§Æ® »ı¼º
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
                 GameObject item = new GameObject("Piece_" + cnt);
                 item.transform.parent = PieceGroup;
 
@@ -212,7 +212,7 @@ public class PuzzelGame2 : MonoBehaviour
             float yPos = StartPos.y - (PieceSize.y * i);
             for (int k = 0; k < PlayType; k++)
             {
-                //2Â÷ ¹è¿­À» 1Â÷ ¹è¿­·Î ÀüÈ¯
+                //2ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ 1ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½È¯
                 cnt = (i * PlayType) + k;
 
                 PieceData[i][k] = tempNum[cnt];
@@ -347,10 +347,10 @@ public class PuzzelGame2 : MonoBehaviour
     }
     void Win()
     {
-        //½Â¸®ÆË¾÷ ¿ÀÇÂ
+        //ï¿½Â¸ï¿½ï¿½Ë¾ï¿½ ï¿½ï¿½ï¿½ï¿½
         WinPopup.SetActive(true);
 
-        //ÇÃ·¹ÀÌÅ¸ÀÓ Ãâ·Â
+        //ï¿½Ã·ï¿½ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½
         string timeStr = System.TimeSpan.FromSeconds(PlayTime).ToString(@"mm\:ss"); ;
         Debug.Log(timeStr);
         PlayTimeText.text = "Play Time : " + timeStr;
