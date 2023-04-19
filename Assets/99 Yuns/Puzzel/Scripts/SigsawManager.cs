@@ -6,24 +6,24 @@ using UnityEngine.EventSystems;
 
 public class SigsawManager : MonoBehaviour
 {
-    [Header("°á°úÀ§Ä¡")]
+    [Header("ê²°ê³¼ìœ„ì¹˜")]
     public RectTransform WinBackGround;
-    [Header("°á°ú¿©¹é »çÀÌÁî")]
+    [Header("ê²°ê³¼ì—¬ë°± ì‚¬ì´ì¦ˆ")]
     public float WinBackOverSize = 5;
 
-    [Header("Á¶°¢ ½ÃÀÛ À§Ä¡")]
+    [Header("ì¡°ê° ì‹œì‘ ìœ„ì¹˜")]
     public RectTransform PiecePoint;
 
-    [Header("Á¶°¢ ´ã´Â °÷µé")]
+    [Header("ì¡°ê° ë‹´ëŠ” ê³³ë“¤")]
     public Transform WinTrans;
     public Transform PieceGroup;
 
-    [Header("´Ş¶óºÙ´Â °Å¸®")]
+    [Header("ë‹¬ë¼ë¶™ëŠ” ê±°ë¦¬")]
     public int snapOffset = 50;
-    [Header("·£´ıÀ¸·Î »Ñ¸®´Â °Å¸®")]
+    [Header("ëœë¤ìœ¼ë¡œ ë¿Œë¦¬ëŠ” ê±°ë¦¬")]
     public float PieceArea = 100;
 
-    [Header("½Â¸®°á°úÃ¢")]
+    [Header("ìŠ¹ë¦¬ê²°ê³¼ì°½")]
     public GameObject WinPopup;
     public Button ReStart;
     public Text PlayTimeText;
@@ -38,7 +38,7 @@ public class SigsawManager : MonoBehaviour
     int PuzzelSize = 9;
     int posPerSize = 3;
 
-    [Header("ÆÛÁñ Å¸ÀÔ")]
+    [Header("í¼ì¦ íƒ€ì…")]
     public PuzzelType PlayType = PuzzelType.Piece3x3;
 
     public List<int> PieceLeaveId = new List<int>();
@@ -51,7 +51,7 @@ public class SigsawManager : MonoBehaviour
         UiTypeStart();
 
         ReStart.onClick.RemoveAllListeners();
-        ReStart.onClick.AddListener(()=> {
+        ReStart.onClick.AddListener(() => {
             UiTypeStart();
         });
     }
@@ -90,7 +90,7 @@ public class SigsawManager : MonoBehaviour
 
         Vector2 StartPos;
 
-        //----- ½Â¸® ÆÇ³¾ À§Ä¡¿Í Å©±â Àû¿ë -----
+        //----- ìŠ¹ë¦¬ íŒë‚¼ ìœ„ì¹˜ì™€ í¬ê¸° ì ìš© -----
         Vector2 WinSize;
         WinSize.x = (One.sizeDelta.x * posPerSize) + (WinBackOverSize * 2);
         WinSize.y = (One.sizeDelta.y * posPerSize) + (WinBackOverSize * 2);
@@ -99,15 +99,15 @@ public class SigsawManager : MonoBehaviour
 
         //float temp = One.sizeDelta.x * (posPerSize / 2);
         //Debug.Log(temp);
-        //----- ½ÃÀÛ À§Ä¡ ÃøÁ¤ -----
+        //----- ì‹œì‘ ìœ„ì¹˜ ì¸¡ì • -----
         StartPos.x = WinBackGround.anchoredPosition.x - (One.sizeDelta.x * (posPerSize / 2));
         StartPos.y = WinBackGround.anchoredPosition.y + (One.sizeDelta.y * (posPerSize / 2));
-        if(posPerSize % 2 == 0)
+        if (posPerSize % 2 == 0)
         {
-            //Â¦¼öÀÏ°æ¿ì ÁÂÇ¥ ¼öÁ¤
-            Debug.Log("¾Æ¾Æ¾Æ¾ÆÚ");
-            StartPos.x += (One.sizeDelta.x / 2);
-            StartPos.y -= (One.sizeDelta.y / 2);
+            //ì§ìˆ˜ì¼ê²½ìš° ì¢Œí‘œ ìˆ˜ì •
+            Debug.Log("ì•„ì•„ì•„ì•„Â?");
+            StartPos.x += One.sizeDelta.x / 2;
+            StartPos.y -= One.sizeDelta.y / 2;
         }
 
         PieceLeaveId.Clear();
@@ -115,7 +115,7 @@ public class SigsawManager : MonoBehaviour
         {
             if (i < WinTrans.childCount)
             {
-                //----- ½Â¸®ÆÛÁñ À§Ä¡Àû¿ë -----
+                //----- ìŠ¹ë¦¬í¼ì¦ ìœ„ì¹˜ì ìš© -----
                 float RandomPos;
                 Transform wC = WinTrans.GetChild(i);
                 RectTransform wcRect = wC.GetComponent<RectTransform>();
@@ -127,7 +127,7 @@ public class SigsawManager : MonoBehaviour
 
                 wcRect.anchoredPosition = SetPos;
 
-                //----- Á¶°¢ »ı¼º -----
+                //----- ì¡°ê° ìƒì„± -----
                 //PieceGroup
                 PieceLeaveId.Add(-1);
                 GameObject Piece = Instantiate(wC.gameObject, PieceGroup);  //new GameObject("Piece Pos " + i.ToString());
@@ -136,15 +136,15 @@ public class SigsawManager : MonoBehaviour
                 //Sprite Image = wC.GetComponent<Image>().sprite;
                 Piece.transform.parent = PieceGroup;
                 Piece.AddComponent<uiPuzzlePiece>().PieceInit(this, i, StartPos, posPerSize);
-                
 
-                //----- Á¶°¢ ¹üÀ§³»·Î ·£´ı ¹èÄ¡ -----
+
+                //----- ì¡°ê° ë²”ìœ„ë‚´ë¡œ ëœë¤ ë°°ì¹˜ -----
                 RandomPos = Random.Range(-PieceArea, PieceArea);
                 Vector2 PieceItemPos = PiecePoint.anchoredPosition;
-                PieceItemPos.x += RandomPos; 
+                PieceItemPos.x += RandomPos;
                 RandomPos = Random.Range(-PieceArea, PieceArea);
                 PieceItemPos.y += RandomPos;
-                Piece.GetComponent<RectTransform>().anchoredPosition = PieceItemPos; 
+                Piece.GetComponent<RectTransform>().anchoredPosition = PieceItemPos;
             }
         }
         WinTrans.gameObject.SetActive(false);
@@ -153,17 +153,17 @@ public class SigsawManager : MonoBehaviour
 
     void Win()
     {
-        //½Â¸®ÆË¾÷ ¿ÀÇÂ
+        //ìŠ¹ë¦¬íŒì—… ì˜¤í”ˆ
         WinPopup.SetActive(true);
 
-        //¼º°ø Á¶°¢ º¸¿©ÁÖ±â
+        //ì„±ê³µ ì¡°ê° ë³´ì—¬ì£¼ê¸°
         WinTrans.gameObject.SetActive(true);
 
-        //±×·ìÀÇ ÀÌµ¿ ÇÇ½º Á¦°Å
-        for(int i = PieceGroup.childCount - 1; i >= 0; i --)
+        //ê·¸ë£¹ì˜ ì´ë™ í”¼ìŠ¤ ì œê±°
+        for (int i = PieceGroup.childCount - 1; i >= 0; i--)
             Destroy(PieceGroup.GetChild(i).gameObject);
 
-        //ÇÃ·¹ÀÌÅ¸ÀÓ Ãâ·Â
+        //í”Œë ˆì´íƒ€ì„ ì¶œë ¥
         string timeStr = System.TimeSpan.FromSeconds(PlayTime).ToString(@"mm\:ss"); ;
         Debug.Log(timeStr);
         PlayTimeText.text = "Play Time : " + timeStr;
@@ -183,7 +183,7 @@ public class SigsawManager : MonoBehaviour
         {
             if (PieceLeaveId[i] != i)
             {
-                Debug.Log("ºÒÀÏÄ¡");
+                Debug.Log("ë¶ˆì¼ì¹˜");
                 win = false;
                 break;
             }
@@ -198,7 +198,7 @@ public class SigsawManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Sprite Size °¡Á®¿À´Â ÇÔ¼ö
+    /// Sprite Size ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜
     /// </summary>
     public Vector3 GetSpriteSize(GameObject _target)
     {

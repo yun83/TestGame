@@ -7,23 +7,23 @@ public class PuzzelGame2 : MonoBehaviour
 {
     public int puzzelState = 0;
 
-    [Header("���� Ÿ��")]
+    [Header("퍼즐 타입")]
     [Tooltip("3x3 = 3, 4x4 = 4, 5x5 = 5")]
     [Range(3, 8)]
     public int PlayType = 3;
     public Transform PieceGroup;
 
-    [Header("�����ġ")]
+    [Header("게임 배경")]
     public RectTransform GameBackGround;
-    [Header("������� ������")]
+    [Header("이겼을 때 배경")]
     public float WinBackOverSize = 5;
 
-    [Header("�¸����â")]
+    [Header("승리 팝업")]
     public GameObject WinPopup;
     public Button ReStart;
     public Text PlayTimeText;
 
-    [Header("���� �̹���")]
+    [Header("퍼즐 이미지")]
     public Sprite[] ImageSpr;
     public Vector2 PieceSize = new Vector2(100, 100);
 
@@ -97,20 +97,20 @@ public class PuzzelGame2 : MonoBehaviour
 
         yield return null;
 
-        //----- ���� �ǳ� ��ġ�� ũ�� ���� -----
+        //----- 퍼즐 배경의 크기 지정 -----
         Vector2 sumSize;
         sumSize.x = (PieceSize.x * PlayType) + (WinBackOverSize * 2);
         sumSize.y = (PieceSize.y * PlayType) + (WinBackOverSize * 2);
 
         GameBackGround.sizeDelta = sumSize;
 
-        //----- ���� ��ġ ���� -----
+        //----- 시작 위치 지정 -----
         StartPos.x = GameBackGround.anchoredPosition.x - (PieceSize.x * (PlayType / 2));
         StartPos.y = GameBackGround.anchoredPosition.y + (PieceSize.y * (PlayType / 2));
         if (PlayType % 2 == 0)
         {
-            //¦���ϰ�� ��ǥ ����
-            Debug.Log("�ƾƾƾƝ�");
+            //중앙에 공간 확보
+            Debug.Log("이상함");
             StartPos.x += (PieceSize.x / 2);
             StartPos.y -= (PieceSize.y / 2);
         }

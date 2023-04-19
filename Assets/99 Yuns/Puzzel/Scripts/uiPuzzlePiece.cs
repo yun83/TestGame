@@ -29,12 +29,12 @@ public class uiPuzzlePiece : MonoBehaviour, IDragHandler, IEndDragHandler, IPoin
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     public void PieceInit(SigsawManager getManager, int idx, Vector2 _startPos, int _size = 3)
     {
-        if(rectTrans == null)
+        if (rectTrans == null)
             rectTrans = GetComponent<RectTransform>();
 
         ID = idx;
@@ -44,7 +44,7 @@ public class uiPuzzlePiece : MonoBehaviour, IDragHandler, IEndDragHandler, IPoin
 
         mouseUpPoint.Clear();
 
-        //ÁÂ¼®Ã³·³ ´Ş¶óºÙ´Â À§Ä¡ ¼ÂÆÃ
+        //ì¢Œì„ì²˜ëŸ¼ ë‹¬ë¼ë¶™ëŠ” ìœ„ì¹˜ ì…‹íŒ…
         int PuzzelSize = _size * _size;
         for (int i = 0; i < PuzzelSize; i++)
         {
